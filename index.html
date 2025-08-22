@@ -56,6 +56,7 @@
                     <table class="table table-striped align-middle mb-0">
                         <thead class="table-success">
                             <tr>
+                                <th>Shively ID</th>
                                 <th>Tipo</th>
                                 <th>Modelo</th>
                                 <th>Serie</th>
@@ -299,11 +300,20 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.success && data.equipos.length > 0) {
+                        // Modificar el encabezado de la tabla
                         let html = `<table class="table table-striped align-middle mb-0">
                                         <thead class="table-success">
-                                            <tr><th>Tipo</th><th>Modelo</th><th>Serie</th><th>Usuario</th><th>Acciones</th></tr>
+                                            <tr>
+                                                <th>Shively ID</th>
+                                                <th>Tipo</th>
+                                                <th>Modelo</th>
+                                                <th>Serie</th>
+                                                <th>Usuario</th>
+                                                <th>Acciones</th>
+                                            </tr>
                                         </thead>
                                         <tbody>`;
+                        // Modificar la generación de filas
                         data.equipos.forEach(eq => {
                             const actionButtons = eq.usuario_id ?
                                 `<div class="d-flex flex-column flex-md-row gap-1">
@@ -313,6 +323,7 @@
                                 `<button class="btn btn-sm btn-success" onclick="mostrarModalAsignar(${eq.asset_id})">Asignar</button>`;
 
                             html += `<tr>
+                                        <td><strong>${eq.asset_id || ''}</strong></td>
                                         <td>${eq.tipo || ''}</td>
                                         <td>${eq.modelo || ''}</td>
                                         <td>${eq.serie || ''}</td>
